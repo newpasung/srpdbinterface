@@ -1,6 +1,5 @@
-package mongodb.services;
+package srp.mongodb.services;
 
-import java.util.Map;
 
 /*
  * 和商品的分类相关的接口
@@ -17,23 +16,23 @@ public interface CategoryService {
 	 * 
 	 * @param categoryName 目录名称
 	 * 
-	 * @param count 返回多少条数据
+	 * @param listType 采用什么排列方式（未定义）
 	 * 
-	 * @param showType 采用什么排列方式（未定义）
+	 * @param count 一页返回多少条数据
 	 * 
-	 * @param listType 决定返回的数据从哪个商品开始，并不包括这个id
+	 * @param pageIndex 分页索引
 	 * 
 	 * @return 返回json格式的商品列表数据
 	 */
-	String getProductsByCat(String categoryName, int count, int listType,
-			String lastProId);
+	String getProductsByCat(String categoryName, int listType, int pageIndex,
+			int count);
 	
 	/*
 	 * 初始化商品分类数据
 	 * 
 	 * @param categories 通过map结构初始化商品分类数据，map的key为父分类名，value里面村子分类名
 	 */
-	void iniCategory(Map<String, String[]> categories);
+	void iniCategory(String filePath);
 	
 
 }

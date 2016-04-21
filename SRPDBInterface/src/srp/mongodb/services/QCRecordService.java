@@ -1,4 +1,4 @@
-package mongodb.services;
+package srp.mongodb.services;
 
 /*
  * 质量抽检记录数据的操作接口
@@ -22,7 +22,7 @@ public interface QCRecordService {
 	 * 
 	 * @param qcInstitude 质检机构
 	 */
-	void insertOne(String qcItem, String qcDate, String productName,
+	void insertOne(String qcItem, String productName,
 			String brand, int isFined, String qcResult, String qcInstitude);
 
 	/*
@@ -30,6 +30,6 @@ public interface QCRecordService {
 	 * 
 	 * @qcIds 想要得到的一组质检报告的id
 	 */
-	void getSomeByIds(String[] qcIds);
+	String getSomeByIds(String... qcIds);
 
 }

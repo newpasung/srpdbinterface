@@ -1,4 +1,4 @@
-package mongodb.services;
+package srp.mongodb.services;
 
 import java.util.Map;
 
@@ -17,13 +17,16 @@ public interface IniProductService {
 	 * 
 	 * @param imgUrls 商品图片的地址
 	 * 
+	 * @param brand 商品的品牌
+	 * 
 	 * @param attrs 商品的属性对，如key为颜色，value为红色
 	 * 
 	 * @param sourceUrl 商品信息来源网址
 	 * 
 	 * @param tags 电商平台提供的商品评价关键词
 	 */
-	void insertOne(String name, String category, String[] imgUrls,
+	void insertOne(String name, String category, String brand,
+			String[] imgUrls,
 			Map<String, String> attrs, String sourceUrl, String[] tags);
 
 	/*
@@ -34,8 +37,14 @@ public interface IniProductService {
 	String getSomeUnhandled();
 
 	/*
-	 * 判断是否有需要处理的新数据（（ 具体判断依据未得到
+	 * 归一化后的商品映射关系设置
+	 * 
+	 * @param idBefore 及原始数据的id
+	 * 
+	 * @param idAfter 及对应到唯一的归一化后的商品的id
+	 * 
+	 * @return undefined
 	 */
-	void undefined_1();
+	String mapping(String idBefore, String idAfter);
 
 }

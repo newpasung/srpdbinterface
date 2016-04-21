@@ -1,4 +1,4 @@
-package mongodb.services;
+package srp.mongodb.services;
 
 import java.util.Map;
 
@@ -16,16 +16,6 @@ public interface ProductService {
 	 */
 	String getOne(String productId);
 	
-	/*
-	 * 对一个商品点赞或贬乏
-	 * 
-	 * @param productId 商品的id
-	 * 
-	 * @param isFavour 0表示贬乏，1表示点赞
-	 * 
-	 * @return 返回一些点赞现时数据
-	 */
-	String favour(String productId, int isFavour);
 	
 	/*
 	 * 插入一条商品的数据，因为这里的数据需保持独立性，不能有重复数据，所以重复数据会失败
@@ -38,7 +28,8 @@ public interface ProductService {
 	 * 
 	 * @param attrs 商品的属性对，如key为颜色，value为红色
 	 */
-	void insertOne(String name, String category, String[] imgUrls,
+	void insertOne(String name, String brand, String category,
+			String[] imgUrls,
 			Map<String, String> attrs);
 
 	/*
@@ -58,9 +49,11 @@ public interface ProductService {
 	 * @param platform 商品价格对应的平台
 	 * 
 	 * @param priceUrl 价格来源的网址
+	 * 
+	 * @param lastUpdatedTime 这个数据更新时间，即调用此函数时的时间
 	 */
 	void updatePrice(String productId, double price, String platform,
-			String priceUrl);
+			String priceUrl, String lastUpdatedTime);
 
 	/*
 	 * 更改一个商品的一项规格属性
@@ -69,12 +62,9 @@ public interface ProductService {
 	 * 
 	 * @param attrName 旧的属性名称
 	 * 
-	 * @param attrValue 旧的属性值
-	 * 
 	 * @param newValue 新的属性值
 	 */
-	void alterAttr(String productId, String attrName, String attrValue,
-			String newValue);
+	void alterAttr(String productId, String attrName, String newValue);
 
 	/*
 	 * 删除某商品的一条属性
@@ -88,13 +78,9 @@ public interface ProductService {
 	String removeAttr(String productId, String attrName);
 
 	/*
-	 * 删除某条价格的推荐信息
-	 * 
-	 * @param productId 产品的id
-	 * 
-	 * @param priceId 价格条目的id
+	 * @param tagsAndrate 格式为 外观：10 表示关键词及其分数
 	 */
-	void removeRecommendPrice(String productId, String priceId);
+	String setTagsandRate(String productId, Map<String, String> tagsAndrate);
 
 	/*
 	 * 获取一个商品的关键词，即评论热词
@@ -104,14 +90,5 @@ public interface ProductService {
 	 * @return 返回json格式的一组关键词
 	 */
 	String getTags(String productId);
-
-	/*
-	 * 更新一个商品的由评论数据得出的数据（好感度）
-	 * 
-	 * @param productId 商品的id
-	 * 
-	 * @param score 好感度值
-	 */
-	void updateCommentScore(String productId, double score);
 
 }
